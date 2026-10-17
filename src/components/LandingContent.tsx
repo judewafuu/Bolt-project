@@ -30,10 +30,10 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
           </div>
         </div>
         <h1 className="font-pixel text-2xl sm:text-4xl text-[#ffd966] text-shadow-pixel text-glow-amber">
-          PIXEL HUB
+          SHINSUKEE
         </h1>
         <p className="font-retro text-lg sm:text-xl text-[#a8896a] mt-2">
-          // retro pixel marketplace &amp; community
+          // index ui designed by shinn
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
 
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 animate-reveal delay-700">
         <p className="font-retro text-sm text-[#6b5240] whitespace-nowrap">
-          ▓▒░ pixel hub v1.0 ░▒▓
+          ▓▒░ shinsukee v1.0 ░▒▓
         </p>
       </div>
 
