@@ -37,7 +37,7 @@ export default function IntroOverlay({ onEnter }: IntroOverlayProps) {
       <div className="relative flex flex-col items-center gap-6 px-4">
         <div className={`text-center mb-2 ${exiting ? 'opacity-0 -translate-y-4' : 'opacity-100'} transition-all duration-500`}>
           <h1 className="font-pixel text-2xl sm:text-4xl text-[#ffd966] text-glow-amber mb-3 animate-pop">
-            PIXEL HUB
+            SHINSUKEE
           </h1>
           <p className="font-retro text-xl sm:text-2xl text-[#a8896a] animate-blink">
             &gt; TAP TO ENTER &lt;
