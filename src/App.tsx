@@ -11,11 +11,11 @@ function App() {
   }, []);
 
   const handleShop = useCallback(() => {
-    window.open('https://example.com/shop', '_blank', 'noopener,noreferrer');
+    window.open('https://shinkai.fun', '_blank', 'noopener,noreferrer');
   }, []);
 
   const handleTelegram = useCallback(() => {
-    window.open('https://t.me/yourchannel', '_blank', 'noopener,noreferrer');
+    window.open('https://t.me/Shinnstudio30', '_blank', 'noopener,noreferrer');
   }, []);
 
   return (
