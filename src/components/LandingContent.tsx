@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ShoppingBag, Send } from 'lucide-react';
 
 interface LandingContentProps {
@@ -6,8 +7,48 @@ interface LandingContentProps {
 }
 
 export default function LandingContent({ onEnterShop, onEnterTelegram }: LandingContentProps) {
+  const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
+
+  useEffect(() => {
+    // 1. Get today's date (e.g., "2026-10-17")
+    const today = new Date().toISOString().split('T')[0];
+    
+    // 2. Check the browser's memory
+    const savedTotal = localStorage.getItem('shinsukee_total_visitors');
+    const lastVisit = localStorage.getItem('shinsukee_last_visit');
+    
+    // Start the counter at 1240 just so it doesn't look empty on day 1!
+    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 1240; 
+
+    // 3. If they haven't visited today (or ever), add +1
+    if (lastVisit !== today) {
+      currentTotal += 1;
+      localStorage.setItem('shinsukee_total_visitors', currentTotal.toString());
+      localStorage.setItem('shinsukee_last_visit', today);
+    }
+
+    // 4. Update the screen
+    setTotalVisitors(currentTotal);
+  }, []);
+
   return (
     <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-8">
+      
+      {/* --- TOP RIGHT: ONLINE & VISITOR COUNTER --- */}
+      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 animate-reveal delay-500">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-[#5fbf6f] rounded-full animate-pulse" />
+          <span className="font-retro text-sm text-[#a8896a]">ONLINE</span>
+        </div>
+        <div className="flex items-center gap-2 bg-[#2a1f18] px-3 py-1.5 border border-[#523d2e] pixel-border-thick">
+          <span className="font-pixel text-[8px] text-[#ffd966]">VISITORS:</span>
+          <span className="font-pixel text-[10px] text-[#f0a830]">
+            {totalVisitors !== null ? totalVisitors.toLocaleString() : '...'}
+          </span>
+        </div>
+      </div>
+
+      {/* --- HEADER --- */}
       <div className="text-center mb-10 animate-reveal">
         <div className="inline-flex items-center gap-3 mb-3">
           <div className="grid grid-cols-4 gap-0">
@@ -37,6 +78,7 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
         </p>
       </div>
 
+      {/* --- BUTTONS --- */}
       <div className="flex flex-col items-center gap-6">
         <button
           onClick={onEnterShop}
@@ -79,6 +121,7 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
         </button>
       </div>
 
+      {/* --- DECORATIONS --- */}
       <div className="absolute bottom-6 left-4 sm:left-8 animate-float no-select hidden sm:block">
         <div className="grid grid-cols-5 gap-0 opacity-60">
           <div className="w-3 h-3" /><div className="w-3 h-3 bg-[#f0a830]" /><div className="w-3 h-3 bg-[#f0a830]" /><div className="w-3 h-3 bg-[#f0a830]" /><div className="w-3 h-3" />
@@ -101,11 +144,6 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
         <p className="font-retro text-sm text-[#6b5240] whitespace-nowrap">
           ▓▒░ shinsukee v1.0 ░▒▓
         </p>
-      </div>
-
-      <div className="absolute top-4 right-4 flex items-center gap-2 animate-reveal delay-500">
-        <div className="w-2 h-2 bg-[#5fbf6f] rounded-full animate-pulse" />
-        <span className="font-retro text-sm text-[#a8896a]">ONLINE</span>
       </div>
     </div>
   );
