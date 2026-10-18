@@ -18,7 +18,7 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
     const lastVisit = localStorage.getItem('shinsukee_last_visit');
     
     // Start the counter at 1240 just so it doesn't look empty on day 1!
-    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 1240; 
+    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 57; 
 
     // 3. If they haven't visited today (or ever), add +1
     if (lastVisit !== today) {
