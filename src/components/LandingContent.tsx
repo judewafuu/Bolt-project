@@ -10,42 +10,42 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
   const [totalVisitors, setTotalVisitors] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Get today's date (e.g., "2026-10-17")
     const today = new Date().toISOString().split('T')[0];
-    
-    // 2. Check the browser's memory
     const savedTotal = localStorage.getItem('shinsukee_total_visitors');
     const lastVisit = localStorage.getItem('shinsukee_last_visit');
     
-    // Start the counter at 1240 just so it doesn't look empty on day 1!
-    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 57; 
+    // Starts at 0, then the +1 logic makes it 1 on the first visit.
+    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 0; 
 
-    // 3. If they haven't visited today (or ever), add +1
     if (lastVisit !== today) {
       currentTotal += 1;
       localStorage.setItem('shinsukee_total_visitors', currentTotal.toString());
       localStorage.setItem('shinsukee_last_visit', today);
     }
 
-    // 4. Update the screen
     setTotalVisitors(currentTotal);
   }, []);
 
   return (
     <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-8">
       
-      {/* --- TOP RIGHT: ONLINE & VISITOR COUNTER --- */}
-      <div className="absolute top-4 right-4 flex flex-col items-end gap-2 animate-reveal delay-500">
+      {/* --- TOP RIGHT: ONLINE & VISITOR COUNTER (Same Format) --- */}
+      <div className="absolute top-4 right-4 flex flex-col items-end gap-1 animate-reveal delay-500">
+        
+        {/* ONLINE */}
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-[#5fbf6f] rounded-full animate-pulse" />
           <span className="font-retro text-sm text-[#a8896a]">ONLINE</span>
         </div>
-        <div className="flex items-center gap-2 bg-[#2a1f18] px-3 py-1.5 border border-[#523d2e] pixel-border-thick">
-          <span className="font-pixel text-[8px] text-[#ffd966]">VISITORS:</span>
-          <span className="font-pixel text-[10px] text-[#f0a830]">
-            {totalVisitors !== null ? totalVisitors.toLocaleString() : '...'}
+
+        {/* VISITORS */}
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-[#5fbf6f] rounded-full animate-pulse" />
+          <span className="font-retro text-sm text-[#a8896a]">
+            VISITORS: {totalVisitors !== null ? totalVisitors.toLocaleString() : '...'}
           </span>
         </div>
+
       </div>
 
       {/* --- HEADER --- */}
