@@ -15,7 +15,7 @@ export default function LandingContent({ onEnterShop, onEnterTelegram }: Landing
     const lastVisit = localStorage.getItem('shinsukee_last_visit');
     
     // Starts at 0, then the +1 logic makes it 1 on the first visit.
-    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 0; 
+    let currentTotal = savedTotal ? parseInt(savedTotal, 10) : 57; 
 
     if (lastVisit !== today) {
       currentTotal += 1;
